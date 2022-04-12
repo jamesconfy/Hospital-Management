@@ -1,0 +1,53 @@
+.foo {
+	display: block;
+	text-align: center;
+}
+
+.foo ul {
+	list-style: none;
+	display: inline-flex;
+}
+
+.foo ul li {
+    margin: 0px 3px;
+}
+
+.name-field {
+	display: inline-flex;
+	width: 100%
+}
+
+.form-control {
+	display: inline
+}
+
+.title {
+	font-size: 12px;
+}
+
+.flags {
+	width: 35%;
+}
+
+.image_country_code {
+	display: flex
+}
+
+
+@media screen and (max-width: 1020px) {
+	.name-field {
+		display: block
+	}
+
+	.image_country_code {
+		display: block
+	}
+
+	.flags {
+		display: none
+	}
+
+	div.img {
+		width: auto;
+	}
+}
