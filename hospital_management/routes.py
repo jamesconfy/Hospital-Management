@@ -28,9 +28,21 @@ def register():
             if form.phone_no.data is not None:
                 form.phone_no.data = form.country_code.data + form.phone_no.data
 
-            
-            user = User(title=form.title.data, username=form.username.data, email=form.email.data, password=hashed_password, first_name=form.first_name.data, last_name=form.last_name.data,
-                        other_name=form.other_name.data, nationality=form.nationality.data, country=form.country.data, city=form.city.data, address=form.address.data, country_code=form.country_code.data, phone_no=form.phone_no.data, date_of_birth=form.date_of_birth.data)
+            user = User(title=form.title.data,
+                        username=form.username.data,
+                        email=form.email.data,
+                        password=hashed_password,
+                        first_name=form.first_name.data,
+                        last_name=form.last_name.data,
+                        other_name=form.other_name.data,
+                        nationality=form.nationality.data,
+                        country=form.country.data,
+                        city=form.city.data,
+                        address=form.address.data,
+                        country_code=form.country_code.data,
+                        phone_no=form.phone_no.data,
+                        date_of_birth=form.date_of_birth.data)
+
             db.session.add(user)
             db.session.commit()
             flash(
@@ -105,15 +117,39 @@ def account():
 
     return render_template('account.html', form=form)
 
+
 @app.route('/patient', methods=['GET', 'POST'])
 @login_required
 def patient():
     form = AddPatientsForm()
-    # if request.method == 'POST':
-    #     patient = Patient()
+    if request.method == 'POST':
+        patient = Patient(firstName=form.firstName.data,
+                          lastName=form.lastName.data,
+                          otherName=form.otherName.data,
+                          patientAge=form.patientAge.data,
+                          ailment=form.ailment.data,
+                          stateOfMind=form.stateOfMind.data,
+                          bloodGroup=form.bloodGroup.data,
+                          genoType=form.genoType.data,
+                          addressPatient=form.addressPatient.data,
+                          cityPatient=form.cityPatient.data,
+                          statePatient=form.statePatient.data,
+                          countryPatient=form.countryPatient.data,
+                          phone_noPatient=form.phone_noPatient.data,
+
+                          nameOfKin=form.nameOfKin.data,
+                          addressOfKin=form.addressOfKin.data,
+                          cityOfKin=form.cityOfKin.data,
+                          stateOfKin=form.stateOfKin.data,
+                          countryOfKin=form.countryOfKin.data,
+                          phoneNoOfKin=form.phoneNoOfKin.data)
+        db.session.add(patient)
+        db.session.commit()
+        flash(
+            f'You have another patient added to your list, {form.firstName.data} {form.lastName.data} {form.otherName.data if form.otherName.data is not None else ""}', 'success')
+        return redirect(url_for('home'))
 
     return render_template('patient.html', title='Add Patients', form=form)
-
 
 
 @app.route('/logout')

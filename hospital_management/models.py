@@ -35,6 +35,7 @@ class Patient(db.Model):
     otherName = db.Column(db.String(120), unique=False, nullable=False)
     patientAge = db.Column(db.String(120), unique=False, nullable=False)
     ailment = db.Column(db.String(120), unique=False, nullable=False)
+    stateOfMind = db.Column(db.Text(), unique=False, nullable=False)
     bloodGroup = db.Column(db.String(120), unique=False, nullable=False)
     genoType = db.Column(db.String(120), unique=False, nullable=False)
     addressPatient = db.Column(db.String(120), unique=False, nullable=False)
