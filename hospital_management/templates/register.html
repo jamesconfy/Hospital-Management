@@ -46,6 +46,27 @@
 
                     <div class="name-field">
                         <div class="form-group m-2">
+                            {{ form.other_name.label(class="form-control-label") }}
+                            {{ form.other_name(class="form-control", size=61) }}
+                        </div>
+                        <div class="form-group">
+                            {{ form.date_of_birth.label(class="form-control-label") }}
+                            {% if form.date_of_birth.errors %}
+                            {{ form.date_of_birth(class="form-control is-invalid", value=form.date_of_birth.data,
+                            type="date") }}
+                            <div class="invalid-feedback">
+                                {% for error in form.date_of_birth.errors %}
+                                <span> {{ error }}</span>
+                                {% endfor %}
+                            </div>
+                            {% else %}
+                            {{ form.date_of_birth(class="form-control", type="date") }}
+                            {% endif %}
+                        </div>
+                    </div>
+
+                    <div class="name-field">
+                        <div class="form-group m-2">
                             {{ form.username.label(class="form-control-label") }}
                             {% if form.username.errors %}
                             {{ form.username(class="form-control is-invalid", value=form.username.data, size=50) }}
@@ -76,37 +97,82 @@
 
                     <div class="name-field">
                         <div class="form-group m-2">
-                            {{ form.nationality.label(class="form-control-label") }}
-                            {{ form.nationality(class="form-control") }}
+                            {{ form.password.label(class="form-control-label") }}
+                            {% if form.password.errors %}
+                            {{ form.password(class="form-control is-invalid", value=form.password.data, size=53) }}
+                            <div class="invalid-feedback">
+                                {% for error in form.password.errors %}
+                                <span> {{ error }}</span>
+                                {% endfor %}
+                            </div>
+                            {% else %}
+                            {{ form.password(class="form-control", size=53) }}
+                            {% endif %}
                         </div>
                         <div class="form-group m-2">
-                            {{ form.date_of_birth.label }}
-                            {{ form.date_of_birth(class="form-control") }}
+                            {{ form.confirm_password.label(class="form-control-label") }}
+                            {% if form.confirm_password.errors %}
+                            {{ form.confirm_password(class="form-control is-invalid", value=form.confirm_password.data,
+                            size=53) }}
+                            <div class="invalid-feedback">
+                                {% for error in form.confirm_password.errors %}
+                                <span> {{ error }}</span>
+                                {% endfor %}
+                            </div>
+                            {% else %}
+                            {{ form.confirm_password(class="form-control", size=53) }}
+                            {% endif %}
                         </div>
                     </div>
 
                     <div class="name-field">
                         <div class="form-group m-2">
-                            {{ form.country.label(class="form-control-label") }}
-                            {{ form.country(class="form-control", onChange=("changecat(this.value)")) }}
+                            {{ form.nationality.label(class="form-control-label") }}
+                            {{ form.nationality(class="form-control country-nationality") }}
                         </div>
                         <div class="form-group m-2">
-                            {{ form.country_code.label(class="form-control-label") }}
-                            <div class="image_country_code">
-                                <img class="form-control flags" id="country-flag">
-                                {{ form.country_code(class="form-control", value="None") }}
-                            </div>
-                            <div class="form-group m-2">
-                                {{ form.phone_no.label(class="form-control-label") }}
-                                {{ form.phone_no(class="form-control") }}
-                            </div>
+                            {{ form.country.label(class="form-control-label") }}
+                            {{ form.country(class="form-control country-nationality",
+                            onChange=("changecat(this.value)")) }}
                         </div>
                     </div>
-                    <div class="form-group m-2">
-                        {{ form.city.label(class="form-control-label") }}
-                        {{ form.city(class="form-control") }}
+
+                    <div class="name-field">
+                        <div class="form-group m-2">
+                            {{ form.country_code.label(class="form-control-label") }}
+                            <div class="country-image">
+                                <img class="form-control flags" id="country-flag">
+                                {{ form.country_code(class="form-control country_code", value=form.country_code.data) }}
+                            </div>
+                        </div>
+                        <div class="form-group m-2">
+                            {{ form.phone_no.label(class="form-control-label") }}
+                            {% if form.phone_no.errors %}
+                            {{ form.phone_no(class="form-control is-invalid", value=form.phone_no.data, size=50) }}
+                            <div class="invalid-feedback">
+                                {% for error in form.phone_no.errors %}
+                                <span> {{ error }}</span>
+                                {% endfor %}
+                            </div>
+                            {% else %}
+                            {{ form.phone_no(class="form-control", size=55) }}
+                            {% endif %}
+                        </div>
+                    </div>
+                    <div class="name-field">
+                        <div class="form-group m-2">
+                            {{ form.city.label(class="form-control-label") }}
+                            {{ form.city(class="form-control", size=42) }}
+                        </div>
+                        <div class="form-group m-2">
+                            {{ form.address.label(class="form-control-label") }}
+                            {{ form.address(class="form-control", size=53) }}
+                        </div>
                     </div>
                 </fieldset>
+                <div class="form-group m-2">
+                    {{ form.submit(class="btn btn-primary submit-btn") }}
+                </div>
             </form>
         </div>
         <div class="col-sm-12 col-md-2"> </div>

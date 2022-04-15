@@ -25,23 +25,40 @@
 	font-size: 12px;
 }
 
-.flags {
-	width: 35%;
+.country-nationality {
+	display: flex;
+	width: 446.2px;
 }
 
-.image_country_code {
+.flags {
+	width: 50px;
+}
+
+.country-image {
 	display: flex
 }
 
+.country_code {
+	width: 254px
+}
 
-@media screen and (max-width: 1020px) {
+.submit-btn {
+	display: block;
+	width: 100%;
+}
+
+@media screen and (max-width: 1260px) {
 	.name-field {
 		display: block
 	}
 
-	.image_country_code {
-		display: block
+	.country-nationality {
+		width: 100%;
 	}
+
+	/* .image_country_code {
+		display: flex
+	} */
 
 	.flags {
 		display: none

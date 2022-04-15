@@ -38,15 +38,15 @@
                         </div>
                         <!-- Navbar Right Side -->
                         <div class="navbar-nav">
-
-                            <a class="nav-item nav-link" href="{{ url_for('home') }}">Account</a>
-                            <a class="nav-item nav-link" href="{{ url_for('home') }}">Plan
-                                Lodgment</a>
-                            <a class="nav-item nav-link" href="{{ url_for('home') }}">Record</a>
-                            <a class="nav-item nav-link" href="{{ url_for('home') }}">Logout</a>
-
-                            <a class="nav-item nav-link" href="{{ url_for('home') }}">Login</a>
-                            <a class="nav-item nav-link" href="{{ url_for('home') }}">Register</a>
+                            {% if current_user.is_authenticated %}
+                            <a class="nav-item nav-link" href="{{ url_for('account') }}">Account</a>
+                            <a class="nav-item nav-link" href="{{ url_for('patient') }}">Add Patient</a>
+                            <a class="nav-item nav-link" href="{{ url_for('home') }}">Home</a>
+                            <a class="nav-item nav-link" href="{{ url_for('logout') }}">Logout</a>
+                            {% else %}
+                            <a class="nav-item nav-link" href="{{ url_for('login') }}">Login</a>
+                            <a class="nav-item nav-link" href="{{ url_for('register') }}">Register</a>
+                            {% endif %}
                         </div>
                     </div>
                 </div>
@@ -93,6 +93,7 @@
         integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx"
         crossorigin="anonymous"></script>
     <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+    <!-- <script src="{{ url_for('static', filename='js/side.js') }}"></script> -->
 
     <!-- Option 2: jQuery, Popper.js, and Bootstrap JS
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>

@@ -1,0 +1,149 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-12 col-md-2"> </div>
+        <div class="col-sm-12 col-md-8">
+            <form action="" method="POST">
+                {{ form.csrf_token }}
+                {% if form.csrf_token.errors %}
+                <div class="warning">You have submitted an invalid CSRF token</div>
+                {% endif %}
+
+                <fieldset>
+                    <div class="name-field">
+                        <div class="form-group m-2">
+                            {{ form.firstName.label(class="form-control-label") }}
+                            {% if form.firstName.errors %}
+                            {{ form.firstName(class="form-control is-invalid", value=form.firstName.data, size=53) }}
+                            <div class="invalid-feedback">
+                                {% for error in form.firstName.errors %}
+                                <span> {{ error }}</span>
+                                {% endfor %}
+                            </div>
+                            {% else %}
+                            {{ form.firstName(class="form-control", size=53) }}
+                            {% endif %}
+                        </div>
+                        <div class="form-group m-2">
+                            {{ form.lastName.label(class="form-control-label") }}
+                            {% if form.lastName.errors %}
+                            {{ form.lastName(class="form-control is-invalid", value=form.lastName.data, size=53) }}
+                            <div class="invalid-feedback">
+                                {% for error in form.lastName.errors %}
+                                <span> {{ error }}</span>
+                                {% endfor %}
+                            </div>
+                            {% else %}
+                            {{ form.lastName(class="form-control", size=53) }}
+                            {% endif %}
+                        </div>
+                    </div>
+
+                    <div class="name-field">
+                        <div class="form-group m-2">
+                            {{ form.otherName.label(class="form-control-label") }}
+                            {{ form.otherName(class="form-control", size=100) }}
+                        </div>
+                    </div>
+                    <div class="name-field">
+                        <div class="form-group m-2">
+                            {{ form.patientAge.label(class="form-control-label") }}
+                            {{ form.patientAge(class="form-control", size=50) }}
+                        </div>
+                        <div class="form-group m-2">
+                            {{ form.ailment.label(class="form-control-label") }}
+                            {{ form.ailment(class="form-control", size=50) }}
+                        </div>
+                    </div>
+
+                    <div class="name-field">
+                        <div class="form-group m-2">
+                            {{ form.bloodGroup.label(class="form-control-label") }}
+                            {{ form.bloodGroup(class="form-control") }}
+                        </div>
+
+                        <div class="form-group m-2">
+                            {{ form.genoType.label(class="form-control-label") }}
+                            {{ form.genoType(class="form-control") }}
+                        </div>
+                    </div>
+
+                    <div class="name-field">
+                        <div class="form-group m-2">
+                            {{ form.addressPatient.label(class="form-control-label") }}
+                            {{ form.addressPatient(class="form-control", size=100) }}
+                        </div>    
+                    </div>
+
+                    <div class="name-field">
+                        <div class="form-group m-2">
+                            {{ form.cityPatient.label(class="form-control-label") }}
+                            {{ form.cityPatient(class="form-control") }}
+                        </div>
+                        <div class="form-group m-2">
+                            {{ form.statePatient.label(class="form-control-label") }}
+                            {{ form.statePatient(class="form-control") }}
+                        </div>
+                        <div class="form-group m-2">
+                            {{ form.countryPatient.label(class="form-control-label") }}
+                            {{ form.countryPatient(class="form-control") }}
+                        </div>
+                    </div>
+
+                    <div class="name-field">
+                        <div class="form-group m-2">
+                            {{ form.phone_noPatient.label(class="form-control-label") }}
+                            {{ form.phone_noPatient(class="form-control", size=100) }}
+                        </div>
+                    </div>
+
+                    <div class="name-field">
+                        <div class="form-group m-2">
+                            <h2>Next of Kin</h2>
+                        </div>
+                    </div>
+                    <div class="name-field">
+                        <div class="form-group m-2">
+                            {{ form.nameOfKin.label(class="form-control-label") }}
+                            {{ form.nameOfKin(class="form-control", size=100) }}
+                        </div>
+                    </div>
+                    <div class="name-field">
+                        <div class="form-group m-2">
+                            {{ form.addressOfKin.label(class="form-control-label") }}
+                            {{ form.addressOfKin(class="form-control", size=100) }}
+                        </div>
+                    </div>
+                    <div class="name-field">
+                        <div class="form-group m-2">
+                            {{ form.cityOfKin.label(class="form-control-label") }}
+                            {{ form.cityOfKin(class="form-control", size=53) }}
+                        </div>
+                        <div class="form-group m-2">
+                            {{ form.stateOfKin.label(class="form-control-label") }}
+                            {{ form.stateOfKin(class="form-control", size=53) }}
+                        </div>
+                        <div class="form-group m-2">
+                            {{ form.countryOfKin.label(class="form-control-label") }}
+                            {{ form.countryOfKin(class="form-control") }}
+                        </div>
+                    </div>
+                    <div class="name-field">
+                        <div class="form-group m-1">
+                            <div class="form-group m-2">
+                                {{ form.phoneNoOfKin.label(class="form-control-label") }}
+                                {{ form.phoneNoOfKin(class="form-control", size=100) }}
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+                <div class="form-group m-2">
+                    {{ form.submit(class="btn btn-primary submit-btn") }}
+                </div>
+            </form>
+        </div>
+        <div class="col-sm-12 col-md-2"> </div>
+    </div>
+</div>
+{% endblock content %}
