@@ -4,7 +4,7 @@ from datetime import timedelta
 from hospital_management.forms import RegisterForm, LoginForm, UpdateAccountForm, AddPatientsForm
 from hospital_management import bcrypt
 from hospital_management import db
-from hospital_management.models import User#, Patient
+from hospital_management.models import User, Patient
 
 
 @app.route('/')
@@ -109,7 +109,8 @@ def account():
 @login_required
 def patient():
     form = AddPatientsForm()
-
+    # if request.method == 'POST':
+    #     patient = Patient()
 
     return render_template('patient.html', title='Add Patients', form=form)
 

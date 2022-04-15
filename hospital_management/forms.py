@@ -1,8 +1,6 @@
-from optparse import Option
-from tokenize import String
 from flask_wtf import FlaskForm
 from flask_login import current_user
-from wtforms import StringField, SelectField, EmailField, PasswordField, SubmitField, DateField, TelField, BooleanField
+from wtforms import StringField, SelectField, EmailField, PasswordField, SubmitField, DateField, TelField, BooleanField, TextAreaField
 from wtforms.validators import DataRequired, Length, EqualTo, Email, Optional, ValidationError
 from hospital_management.utils import countries, age
 from hospital_management.models import User
@@ -108,6 +106,7 @@ class AddPatientsForm(FlaskForm):
     otherName = StringField('Other Name of Patient', validators=[Optional(), Length(min=6, max=120)])
     patientAge = StringField('Age', validators=[DataRequired()])
     ailment = StringField('Ailment', validators=[DataRequired()])
+    stateOfMind = TextAreaField('How Do You Feel', validators=[DataRequired()])
     bloodGroup = NonValidatingSelectField('Blood Group', choices=blood, validators=[Optional()], validate_choice=False)
     genoType = NonValidatingSelectField('Genotype', choices=geno, validators=[Optional()], validate_choice=False)
     addressPatient = StringField('Address', validators=[DataRequired()])
@@ -115,7 +114,7 @@ class AddPatientsForm(FlaskForm):
     statePatient = StringField('State', validators=[DataRequired()])
     countryPatient = NonValidatingSelectField('Country', choices=country, validators=[Optional()], validate_choice=False)
     phone_noPatient = TelField('Phone Number', validators=[Optional()])
-    
+
     nameOfKin = StringField('Name of Next of Kin', validators=[DataRequired(), Length(min=5, max=200)])
     addressOfKin = StringField('Address of Next of Kin', validators=[DataRequired()])
     cityOfKin = StringField('City', validators=[DataRequired()])

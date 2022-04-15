@@ -23,9 +23,31 @@ class User(db.Model, UserMixin):
     phone_no = db.Column(db.String(120), unique=False, nullable=True)
     date_of_birth = db.Column(db.DateTime(120), unique=False, nullable=False)
     date_created = db.Column(db.DateTime(120), default=datetime.utcnow())
- #   patient = db.relationship('Patient', backref='doctor', lazy=True)
+    mypatient = db.relationship('Patient', backref='doctor', lazy=True)
 
     def __repr__(self):
         return f"User('{self.username}', '{self.email}')"
 
-#class Patient(db.Model):
+class Patient(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    firstName = db.Column(db.String(120), unique=False, nullable=False)
+    lastName = db.Column(db.String(120), unique=False, nullable=False)
+    otherName = db.Column(db.String(120), unique=False, nullable=False)
+    patientAge = db.Column(db.String(120), unique=False, nullable=False)
+    ailment = db.Column(db.String(120), unique=False, nullable=False)
+    bloodGroup = db.Column(db.String(120), unique=False, nullable=False)
+    genoType = db.Column(db.String(120), unique=False, nullable=False)
+    addressPatient = db.Column(db.String(120), unique=False, nullable=False)
+    cityPatient = db.Column(db.String(120), unique=False, nullable=False)
+    statePatient = db.Column(db.String(120), unique=False, nullable=False)
+    countryPatient = db.Column(db.String(120), unique=False, nullable=False)
+    phone_noPatient = db.Column(db.String(120), unique=False, nullable=False)
+    
+    nameOfKin = db.Column(db.String(120), unique=False, nullable=False)
+    addressOfKin = db.Column(db.String(120), unique=False, nullable=False)
+    cityOfKin = db.Column(db.String(120), unique=False, nullable=False)
+    stateOfKin = db.Column(db.String(120), unique=False, nullable=False)
+    countryOfKin = db.Column(db.String(120), unique=False, nullable=False)
+    phoneNoOfKin = db.Column(db.String(120), unique=False, nullable=False)
+    date_created = db.Column(db.DateTime(120), default=datetime.utcnow())
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
