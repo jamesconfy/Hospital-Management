@@ -12,16 +12,16 @@
                     <legend class="border-bottom mb-4">{{ legend }}</legend>
 
                     <!-- div of table headers -->
-                    <div class="plan-display">
-                        {% if not patients.items %}
+                    <div class="">
+                        {% if not doctors.items %}
                         <h2>No Record</h2>
                         {% else %}
-                        {% for patient in patients.items %}
+                        {% for doctor in doctors.items %}
                         <div class="content-section">
                             <div class="content-header">
                                 <div class="">
-                                    <a href="">
-                                        {{ patient.firstName }} {{ patient.otherName }} {{ patient.lastName }}
+                                    <a href="{{ url_for('doctor', doctor_id=doctor.id, name=doctor.first_name + ' ' + doctor.last_name) }}">
+                                        <h4>{{ doctor.first_name }} {{ doctor.other_name }} {{ doctor.last_name }}</h4>
                                     </a>
                                 </div>
                             </div>
@@ -30,16 +30,12 @@
                                 <div class="container-fluid">
                                     <div class="row">
                                         <div class="col-sm-12 col-md-4">
-                                            <h6 class="pr-3">Doctor: {{ patient.doctor.first_name }} {{ patient.doctor.last_name }} {{ patient.doctor.other_name }} </h6>
-                                            <h6 class="pr-3">Doctor: {{ patient.doctor.email }}</h6>
-                                            <h6 class="pr-3">Ailment: {{ patient.ailment }}</h6>
-                                            <h6 class="pr-3">State of Mind: {{ patient.stateOfMind }}</h6>
-                                            <h6 class="pr-3">Blood Group: {{ patient.bloodGroup }}</h6>
-                                            <h6 class="pr-3">Genotype: {{ patient.genoType }}</h6>
-                                            <h6 class="pr-3">Address of Patient: {{ patient.addressPatient }}, {{ patient.cityPatient }}, {{ patient.statePatient }}, {{ patient.countryPatient }}</h6>
-                                            <h6 class="pr-3">Phone Number: {{ patient.phone_noPatient }}</h6>
-                                        </div>
+                                            <h6 class="pr-3">Username: {{ doctor.username }}</h6>
+                                            <h6 class="pr-3">Email: {{ doctor.email }}</h6>
+                                            <h6 class="pr-3">Nationality: {{ doctor.nationality }}</h6>
+                                            <h6 class="pr-3">Days Active: </h6>
 
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -47,11 +43,11 @@
                         <hr>
                         {% endfor %}
                         <div class="links">
-                            {% for page_num in patients.iter_pages(left_edge=1, right_edge=1, left_current=1,
+                            {% for page_num in doctors.iter_pages(left_edge=1, right_edge=1, left_current=1,
                             right_current=2)
                             %}
                             {% if page_num %}
-                            {% if patients.page == page_num %}
+                            {% if doctors.page == page_num %}
                             <a class="btn btn-info mt-4 mb-4" href="{{ url_for('home', page=page_num) }}">{{ page_num
                                 }}</a>
                             {% else %}

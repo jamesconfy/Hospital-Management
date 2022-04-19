@@ -101,9 +101,9 @@ class UpdateAccountForm(FlaskForm):
 
 
 class AddPatientsForm(FlaskForm):
-    firstName = StringField('First Name of Patient', validators=[DataRequired(), Length(min=6, max=120)])
-    lastName = StringField('Last Name of Patient', validators=[DataRequired(), Length(min=6, max=120)])
-    otherName = StringField('Other Name of Patient', validators=[Optional(), Length(min=6, max=120)])
+    firstName = StringField('First Name of Patient', validators=[DataRequired(), Length(min=1, max=120)])
+    lastName = StringField('Last Name of Patient', validators=[DataRequired(), Length(min=1, max=120)])
+    otherName = StringField('Other Name of Patient', validators=[Optional(), Length(min=1, max=120)])
     patientAge = StringField('Age', validators=[DataRequired()])
     ailment = StringField('Ailment', validators=[DataRequired()])
     stateOfMind = TextAreaField('How Do You Feel', validators=[DataRequired()])

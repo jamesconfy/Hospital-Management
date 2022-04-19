@@ -52,3 +52,6 @@ class Patient(db.Model):
     phoneNoOfKin = db.Column(db.String(120), unique=False, nullable=False)
     date_created = db.Column(db.DateTime(120), default=datetime.utcnow())
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+
+    def __repr__(self):
+        return f"Patient: {self.firstName} {self.lastName} {self.otherName} with Ailment: {self.ailment} and Genotype: {self.genoType}"

@@ -10,7 +10,12 @@ from hospital_management.models import User, Patient
 @app.route('/')
 @app.route('/home')
 def home():
-    return render_template("index.html", title='Dashboard')
+    if current_user.is_authenticated:
+        page = request.args.get('page', 1, type=int)
+        patients = Patient.query.order_by(Patient.date_created.desc()).paginate(per_page=3, page=page)
+        return render_template('index.html', title='Dashboard', patients=patients, legend='Home')
+    else:
+        return render_template('home.html', title='Dashboard')
 
 
 @app.route('/register', methods=['GET', 'POST'])
@@ -48,6 +53,7 @@ def register():
             flash(
                 f'Account created successfully for {form.username.data}', 'success')
             return redirect(url_for('login'))
+
     return render_template('register.html', form=form, title='Register')
 
 
@@ -55,7 +61,6 @@ def register():
 def before_request():
     session.permanent = True
     app.permanent_session_lifetime = timedelta(minutes=2)
-
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
@@ -117,6 +122,18 @@ def account():
 
     return render_template('account.html', form=form)
 
+@app.route('/doctors')
+def doctors():
+    page = request.args.get('page', 1, type=int)
+    doctors = User.query.order_by(User.date_created.desc()).paginate(per_page=3, page=page)
+    return render_template('doctors.html', title='Doctors', doctors=doctors, legend='List of Doctors')
+
+@app.route('/doctors/<string:name>###<int:doctor_id>###')
+def doctor(name, doctor_id):
+    doctor = User.query.filter_by(id=doctor_id).first()
+    title = f"Profile of {doctor.first_name} {doctor.other_name} {doctor.last_name}"
+    legend = f"{doctor.first_name} {doctor.other_name} {doctor.last_name}"
+    return render_template('doctor.html', title=title, legend=legend, doctor=doctor)
 
 @app.route('/patient', methods=['GET', 'POST'])
 @login_required
@@ -142,15 +159,15 @@ def patient():
                           cityOfKin=form.cityOfKin.data,
                           stateOfKin=form.stateOfKin.data,
                           countryOfKin=form.countryOfKin.data,
-                          phoneNoOfKin=form.phoneNoOfKin.data)
+                          phoneNoOfKin=form.phoneNoOfKin.data,
+                          doctor=current_user)
         db.session.add(patient)
         db.session.commit()
         flash(
             f'You have another patient added to your list, {form.firstName.data} {form.lastName.data} {form.otherName.data if form.otherName.data is not None else ""}', 'success')
         return redirect(url_for('home'))
 
-    return render_template('patient.html', title='Add Patients', form=form)
-
+    return render_template('patient.html', title='Add Patients', form=form)    
 
 @app.route('/logout')
 @login_required
