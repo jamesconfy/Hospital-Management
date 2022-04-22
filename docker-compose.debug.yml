@@ -1,0 +1,39 @@
+version: '3.9'
+
+services:
+  hospitalmanagement:
+    container_name: hospitalmanagement
+    image: hospitalmanagement
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    networks:
+      - mysqlnet
+    ports:
+      - 5006:5006
+    volumes:
+      - ./:/app
+    restart: always
+
+  mysqldb-hospitalmanagement:
+    container_name: mysqldb-hospitalmanagement
+    image: mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: arsenalb2
+      MYSQL_DATABASE: #####
+      MYSQL_USER: #####
+      MYSQL_PASSWORD: #####
+    ports:
+      - 3310:3306
+    networks:
+      - mysqlnet
+    volumes:
+      - mysql:/var/lib/mysql
+      - mysql_config:/etc/mysql
+
+volumes:
+  mysql:
+  mysql_config:
+
+networks:
+  mysqlnet:

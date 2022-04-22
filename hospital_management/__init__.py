@@ -2,7 +2,7 @@ from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_bcrypt import Bcrypt
 from flask_login import LoginManager, login_manager
-from config import DevConfig
+from config import ProdConfig
 
 bcrypt = Bcrypt()
 db = SQLAlchemy()
@@ -15,7 +15,7 @@ login_manager.needs_refresh_message_category = "info"
 
 def create_app():
     app = Flask("hospital_management")
-    app.config.from_object(DevConfig)
+    app.config.from_object(ProdConfig)
     bcrypt.init_app(app)
     db.init_app(app)
     login_manager.init_app(app)
